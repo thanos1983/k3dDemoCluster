@@ -70,17 +70,16 @@ $ curl -X GET http://k3d-registry.localhost:5000/v2/_catalog
 ```
 
 ### How to destroy cluster and local registry
- 14 At the end of the experimentation the user can destroy the cluster and registry.
- 15
- 16 Using a bash terminal:
- 17
- 18 ```bash
- 19 $ ./k3sScripts.sh -d
- 20 you have supplied the -d 'destroy' option
- 21 INFO[0000] Deleting cluster 'k3s-default'
- 22 INFO[0003] Deleting 2 attached volumes...
- 23 WARN[0003] Failed to delete volume 'k3d-k3s-default-images' of cluster 'k3s-default': failed to find volume 'k3d-    >  \k3s-default-images': Error: No such volume: k3d-k3s-default-images -> Try to delete it manually
- 24 INFO[0003] Removing cluster details from default kubeconfig...
- 25 INFO[0003] Removing standalone kubeconfig file (if there is one)...
- 26 INFO[0003] Successfully deleted cluster k3s-default!
- 27 ```
+At the end of the experimentation the user can destroy the cluster and registry.
+
+Using a bash terminal:
+```bash
+$ ./k3sScripts.sh -d
+you have supplied the -d 'destroy' option
+INFO[0000] Deleting cluster 'k3s-default'
+INFO[0003] Deleting 2 attached volumes...
+WARN[0003] Failed to delete volume 'k3d-k3s-default-images' of cluster 'k3s-default': failed to find volume 'k3d-    >  \k3s-default-images': Error: No such volume: k3d-k3s-default-images -> Try to delete it manually
+INFO[0003] Removing cluster details from default kubeconfig...
+INFO[0003] Removing standalone kubeconfig file (if there is one)...
+INFO[0003] Successfully deleted cluster k3s-default!
+```
