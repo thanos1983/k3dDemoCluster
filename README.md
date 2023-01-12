@@ -6,6 +6,7 @@ Simple fundamentals for K3d Cluster all in one with a few minor addons of k8s.
 - [Pulling and pushing image on local registry](#pulling-and-pushing-image-on-local-registry)
 - [Tag the image and push back to registry](#tag-the-image-and-push-back-to-registry)
 - [List the images in the registry](#list-the-images-in-the-registry)
+- [How to destroy cluster and local registry](#how-to-destroy-cluster-and-local-registry)
 
 ## Prerequisites
 The user needs to has pre-installed `docker`, `kubectl` and `k3d`. Instalation instructions on how to install [k3d](https://k3d.io/v5.4.6/) and [kubectl](https://kubernetes.io/docs/tasks/tools/).
@@ -68,3 +69,18 @@ $ curl -X GET http://k3d-registry.localhost:5000/v2/_catalog
 {"repositories":["nginx-unprivileged"]}
 ```
 
+### How to destroy cluster and local registry
+ 14 At the end of the experimentation the user can destroy the cluster and registry.
+ 15
+ 16 Using a bash terminal:
+ 17
+ 18 ```bash
+ 19 $ ./k3sScripts.sh -d
+ 20 you have supplied the -d 'destroy' option
+ 21 INFO[0000] Deleting cluster 'k3s-default'
+ 22 INFO[0003] Deleting 2 attached volumes...
+ 23 WARN[0003] Failed to delete volume 'k3d-k3s-default-images' of cluster 'k3s-default': failed to find volume 'k3d-    >  \k3s-default-images': Error: No such volume: k3d-k3s-default-images -> Try to delete it manually
+ 24 INFO[0003] Removing cluster details from default kubeconfig...
+ 25 INFO[0003] Removing standalone kubeconfig file (if there is one)...
+ 26 INFO[0003] Successfully deleted cluster k3s-default!
+ 27 ```
