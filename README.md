@@ -2,15 +2,15 @@
 Simple fundamentals for K3d Cluster all in one with a few minor addons of k8s.
 
 ## Content:
-Prerequisites[^1]
-Pulling and pushing image on local registry[^2]
-Tag the image and push back to registry[^3]
-List the images in the registry[^4]
+[Prerequisites][#Prerequisites]
+[Pulling and pushing image on local registry](#pulling-and-pushing-image-on-local-registry)
+[Tag the image and push back to registry](#tag-the-image-and-push-back-to-registry)
+[List the images in the registry](#list-the-images-in-the-registry)
 
-[^1]: ## Prerequisites
+## Prerequisites
 The user needs to has pre-installed `docker`, `kubectl` and `k3d`. Instalation instructions on how to install [k3d](https://k3d.io/v5.4.6/) and [kubectl](https://kubernetes.io/docs/tasks/tools/).
 
-[^2]: ### Pulling and pushing image on local registry.
+### Pulling and pushing image on local registry.
 We will assume the user has being able succesfully to create the registry.
 Next step is to pull the image and push to private registry.
 
@@ -38,7 +38,7 @@ ghcr.io/k3d-io/k3d-proxy      5.4.6          6cb682cd92ed   4 months ago   42.4M
 rancher/k3s                   v1.24.4-k3s1   a32cc5db09d0   4 months ago   214MB
 ```
 
-[^3]: ### Tag the image and push back to registry.
+### Tag the image and push back to registry.
 
 Using a bash terminal:
 
@@ -60,7 +60,7 @@ alpine: digest: sha256:b2968c725aab10397452816204cb33da81374f6b229362e6c4eaacbd0
 
 On the example provided above the image already exists but the output will be similar to that.
 
-[^4]: ### List the images in the registry.
+### List the images in the registry.
 Using a bash terminal:
 
 ```bash
