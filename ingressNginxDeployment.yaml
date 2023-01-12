@@ -1,0 +1,115 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    kubernetes.io/metadata.name: demo
+  name: demo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nginxLabel
+  name: nginx-deployment
+  namespace: demo
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nginxLabel
+  template:
+    metadata:
+      labels:
+        app: nginxLabel
+    spec:
+      securityContext:
+        runAsUser: 101
+        runAsGroup: 101
+        runAsNonRoot: true
+      restartPolicy: Always
+      containers:
+        - name: nginx
+          image: k3d-registry.localhost:5000/nginx-unprivileged:alpine
+          securityContext:
+            allowPrivilegeEscalation: false
+          resources:
+            limits:
+              memory: 20Mi
+              cpu: 200m
+            requests:
+              cpu: 100m
+              memory: 10Mi
+          ports:
+            - containerPort: 8080
+              name: nginx-web-port
+          livenessProbe:
+            httpGet:
+              path: /
+              port: nginx-web-port
+            initialDelaySeconds: 5
+            periodSeconds: 5
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx-hpa
+  namespace: demo
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: nginx-deployment
+  minReplicas: 1
+  maxReplicas: 2
+  metrics:
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 60
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nginxLabel
+  name: nginx-service
+  namespace: demo
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: http
+      port: 80
+      protocol: TCP
+      targetPort: nginx-web-port
+  selector:
+    app: nginxLabel
+  sessionAffinity: None
+  type: ClusterIP
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nginx-ingress
+  namespace: demo
+  labels:
+    app: nginxLabel
+  annotations:
+    ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: nginx-service
+              port:
+                number: 80
