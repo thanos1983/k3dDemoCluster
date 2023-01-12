@@ -2,12 +2,12 @@
 Simple fundamentals for K3d Cluster all in one with a few minor addons of k8s.
 
 ## Content:
-[Prerequisites][#Prerequisites]
-[Pulling and pushing image on local registry](#pulling-and-pushing-image-on-local-registry)
-[Tag the image and push back to registry](#tag-the-image-and-push-back-to-registry)
-[List the images in the registry](#list-the-images-in-the-registry)
+- [Prerequisites][#Prerequisites]
+- [Pulling and pushing image on local registry](#pulling-and-pushing-image-on-local-registry)
+- [Tag the image and push back to registry](#tag-the-image-and-push-back-to-registry)
+- [List the images in the registry](#list-the-images-in-the-registry)
 
-## Prerequisites
+### Prerequisites
 The user needs to has pre-installed `docker`, `kubectl` and `k3d`. Instalation instructions on how to install [k3d](https://k3d.io/v5.4.6/) and [kubectl](https://kubernetes.io/docs/tasks/tools/).
 
 ### Pulling and pushing image on local registry.
