@@ -21,7 +21,7 @@ The user needs to has pre-installed `docker`, `kubectl` and `k3d`. Instalation i
 
 ### Pulling and pushing image on local registry.
 We will assume the user has being able succesfully to create the registry.
-Next step is to pull the image and push to private registry.
+Next step is to pull the image and push to private registry. On this example we used the official unpriviledged nginx image [nginxinc/nginx-unprivileged](https://hub.docker.com/r/nginxinc/nginx-unprivileged).
 
 Using a bash terminal:
 
