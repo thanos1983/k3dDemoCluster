@@ -9,7 +9,11 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginxLabel
+    app.kubernetes.io/version: "0.0.1"
+    app.kubernetes.io/name: "nginxLabel"
+    app.kubernetes.io/component: "frontend"
+    app.kubernetes.io/managed-by: "kubectl"
+    app.kubernetes.io/instance: "nginxLabel-dev"
   name: nginx-deployment
   namespace: demo
 spec:
@@ -18,11 +22,19 @@ spec:
     type: Recreate
   selector:
     matchLabels:
-      app: nginxLabel
+      app.kubernetes.io/version: "0.0.1"
+      app.kubernetes.io/name: "nginxLabel"
+      app.kubernetes.io/component: "frontend"
+      app.kubernetes.io/managed-by: "kubectl"
+      app.kubernetes.io/instance: "nginxLabel-dev"
   template:
     metadata:
       labels:
-        app: nginxLabel
+        app.kubernetes.io/version: "0.0.1"
+        app.kubernetes.io/name: "nginxLabel"
+        app.kubernetes.io/component: "frontend"
+        app.kubernetes.io/managed-by: "kubectl"
+        app.kubernetes.io/instance: "nginxLabel-dev"
     spec:
       securityContext:
         runAsUser: 101
@@ -75,7 +87,11 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: nginxLabel
+    app.kubernetes.io/version: "0.0.1"
+    app.kubernetes.io/name: "nginxLabel"
+    app.kubernetes.io/component: "frontend"
+    app.kubernetes.io/managed-by: "kubectl"
+    app.kubernetes.io/instance: "nginxLabel-dev"
   name: nginx-service
   namespace: demo
 spec:
@@ -89,7 +105,11 @@ spec:
       protocol: TCP
       targetPort: nginx-web-port
   selector:
-    app: nginxLabel
+    app.kubernetes.io/version: "0.0.1"
+    app.kubernetes.io/name: "nginxLabel"
+    app.kubernetes.io/component: "frontend"
+    app.kubernetes.io/managed-by: "kubectl"
+    app.kubernetes.io/instance: "nginxLabel-dev"
   sessionAffinity: None
   type: ClusterIP
 ---
@@ -99,7 +119,11 @@ metadata:
   name: nginx-ingress
   namespace: demo
   labels:
-    app: nginxLabel
+    app.kubernetes.io/version: "0.0.1"
+    app.kubernetes.io/name: "nginxLabel"
+    app.kubernetes.io/component: "frontend"
+    app.kubernetes.io/managed-by: "kubectl"
+    app.kubernetes.io/instance: "nginxLabel-dev"
   annotations:
     ingress.kubernetes.io/ssl-redirect: "false"
 spec:
