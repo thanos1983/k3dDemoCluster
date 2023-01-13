@@ -18,7 +18,7 @@ Simple fundamentals for K3d Cluster all in one with a few minor addons of k8s.
 - [Kubernetes pod and container security](#kubernetes-pod-and-container-security)
 - [How to destroy cluster and local registry](#how-to-destroy-cluster-and-local-registry)
 
-## Prerequisites
+## Prerequisites.
 The user needs to has pre-installed `docker`, `kubectl` and `k3d`. Instalation instructions on how to install [k3d](https://k3d.io/v5.4.6/) and [kubectl](https://kubernetes.io/docs/tasks/tools/).
 
 The user also needs to configure directory `/etc/hosts` for domain lookup.
@@ -268,7 +268,7 @@ selector:
 
 More information can be found on the official kubernetes documentation [Recommended Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/).
 
-### Kubernetes livenessProbe
+### Kubernetes livenessProbe.
 It is highly recoemmended that the user configures a livenessProbe on the container, so kubernetes can monitor the container and if needed to intefere based on strategy.
 
 Sample of demo deployment and container configuration:
@@ -287,7 +287,7 @@ livenessProbe:
 
 More information can be found on the official kubernetes documentation [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/).
 
-### Kubernetes pod and container security
+### Kubernetes pod and container security.
 A user it is highly recommended that the user always downgrade the user of the container. There are several parameters that the user can set. On this example we will use the minimal recommendations.
 
 Sample of demo deployment and pod / container security restrictions:
