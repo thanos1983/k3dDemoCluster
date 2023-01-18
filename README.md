@@ -232,7 +232,7 @@ On this simple demo we have restrigned the resources of the container for demost
 
 Sample of configurations from deployment:
 
-```bash
+```yaml
 containers:
   - name: nginx
     image: k3d-registry.localhost:5000/nginx-unprivileged:alpine
@@ -256,7 +256,7 @@ The goal of `Recommended Labels` is to help other tools of `kubectl` / `dashboar
 
 Sample of the labels on this example:
 
-```bash
+```yaml
 selector:
   matchLabels:
     app.kubernetes.io/version: "0.0.1"
@@ -279,7 +279,7 @@ It is highly recoemmended that the user configures a livenessProbe on the contai
 
 Sample of demo deployment and container configuration:
 
-```bash
+```yaml
 ports:
   - containerPort: 8080
     name: nginx-web-port
@@ -298,7 +298,7 @@ A user it is highly recommended that the user always downgrade the user of the c
 
 Sample of demo deployment and pod / container security restrictions:
 
-```bash
+```yaml
 spec:
   securityContext:
     runAsUser: 101
