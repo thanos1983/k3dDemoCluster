@@ -252,7 +252,7 @@ More information can be found on the official documentation of kubernetes [Resou
 **Note:** Kubernetes has the ability to set upsacaling and also downscaling configuration parameters. On this example we only set upscaling as we try to keep it as simple as possible. For more information please read the official documentation [Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/).
 
 ### Kubernetes labels.
-According to kubernetes best practices it is recommneded for users to use as many labels as possible on a shared namespaces to avoid mixing configurations or deployments.
+The goal of `Recommended Labels` is to help other tools of `kubectl` / `dashboard` to visualize and manage kubernetes objects. Common set of labels can help tools to understand / describe the objects in a common manner that can be queried.
 
 Sample of the labels on this example:
 
@@ -267,6 +267,12 @@ selector:
 ```
 
 More information can be found on the official kubernetes documentation [Recommended Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/).
+
+Labels do not stop only there. Labels can be used also for [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/). Deeper documentation can be also found on [Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).
+
+Users can use default predefined [Well-Known Labels, Annotations and Taints](https://kubernetes.io/docs/reference/labels-annotations-taints/).
+
+Since we are trying touch the surface of Labels it is also very very important topic for users to read and understand [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/). This part of the documentation it is more for Architectural cluster design and Pod / resources allocation.
 
 ### Kubernetes livenessProbe.
 It is highly recoemmended that the user configures a livenessProbe on the container, so kubernetes can monitor the container and if needed to intefere based on strategy.
