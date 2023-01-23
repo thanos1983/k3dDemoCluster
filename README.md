@@ -248,7 +248,7 @@ containers:
 
 More information can be found on the official documentation of kubernetes [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
 
-**Note:** Kubernetes has the ability to set upsacaling and also downscaling configuration parameters. On this example we only set upscaling as we try to keep it as simple as possible. For more information please read the official documentation [Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/).
+**Note:** Kubernetes has the ability to set upscaling and also downscaling configuration parameters. On this example we only set upscaling as we try to keep it as simple as possible. For more information please read the official documentation [Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/).
 
 ### Kubernetes labels.
 The goal of `Recommended Labels` is to help other tools of `kubectl` / `dashboard` to visualize and manage kubernetes objects. Common set of labels can help tools to understand / describe the objects in a common manner that can be queried.
