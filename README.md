@@ -310,7 +310,7 @@ spec:
         allowPrivilegeEscalation: false
 ```
 
-On the example provided above the image that we use it has a custom user with uid and gid 101. It is highly recommended for the users to prepare a Dockerfile with a downgraded user and not a root user for extra security.
+In the above example, the image used has a custom user with [UID](https://linux.die.net/man/3/uid) and [GID](https://www.unix.com/man-page/linux/1/gid/) 101. It is highly recommended for the users to prepare a Dockerfile with a downgraded user and not a root user for extra security.
 
 More information can be found on the official kubernetes documentation [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 
