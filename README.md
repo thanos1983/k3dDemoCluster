@@ -293,7 +293,7 @@ livenessProbe:
 More information can be found on the official kubernetes documentation [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/).
 
 ### Kubernetes pod and container security.
-A user it is highly recommended that the user always downgrade the user of the container. There are several parameters that the user can set. On this example we will use the minimal recommendations.
+For security purposes it is highly recommended that the container user should bealways downgraded to a non `root` (not privileged) user. User name `root` is refered as the user which by default has access to all commands and files on the Linux / Unix Operating System (OS).
 
 Sample of demo deployment and pod / container security restrictions:
 
