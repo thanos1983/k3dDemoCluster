@@ -227,7 +227,7 @@ nginx-hpa   Deployment/nginx-deployment   91%/60%   1         2         2       
 ```
 
 ### Horizontal autoscaling configuration notes.
-On this simple demo we have restrigned the resources of the container for demostration autoscaling purposes. **Warning:** Do not use these values on production environment they are only for demonstration purposes.
+On this simple demo we have restrained the resources of the container for demostration autoscaling purposes. **Warning:** Do not use these values on production environment they are only for demonstration purposes.
 
 Sample of configurations from deployment:
 
