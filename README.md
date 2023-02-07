@@ -19,7 +19,7 @@ Simple fundamentals for K3d Cluster all-in-one with a few minor addons of k8s.
 - [How to destroy cluster and local registry](#how-to-destroy-cluster-and-local-registry)
 
 ## Prerequisites.
-The user needs to has pre-installed `docker`, `kubectl` and `k3d`. Installation instructions on how to install [k3d](https://k3d.io/v5.4.6/) and [kubectl](https://kubernetes.io/docs/tasks/tools/).
+The user needs to have pre-installed `docker`, `kubectl` and `k3d`. Installation instructions on how to install [k3d](https://k3d.io/v5.4.6/) and [kubectl](https://kubernetes.io/docs/tasks/tools/).
 
 The user also needs to configure directory `/etc/hosts` for domain lookup.
 
