@@ -1,4 +1,5 @@
-Simple fundamentals for K3d Cluster all in one with a few minor addons of k8s.
+# k3dDemoCluster
+Simple fundamentals for K3d Cluster all-in-one with a few minor addons of k8s.
 
 ## Content:
 - [Prerequisites](#Prerequisites)
@@ -18,7 +19,7 @@ Simple fundamentals for K3d Cluster all in one with a few minor addons of k8s.
 - [How to destroy cluster and local registry](#how-to-destroy-cluster-and-local-registry)
 
 ## Prerequisites.
-The user needs to have pre-installed `docker`, `kubectl` and `k3d`. Instalation instructions on how to install [k3d](https://k3d.io/v5.4.6/) and [kubectl](https://kubernetes.io/docs/tasks/tools/).
+The user needs to has pre-installed `docker`, `kubectl` and `k3d`. Installation instructions on how to install [k3d](https://k3d.io/v5.4.6/) and [kubectl](https://kubernetes.io/docs/tasks/tools/).
 
 The user also needs to configure directory `/etc/hosts` for domain lookup.
 
@@ -45,7 +46,7 @@ rtt min/avg/max/mdev = 0.051/0.278/0.506/0.227 ms
 ```
 
 ### Pulling and pushing image on local registry.
-We will assume the user has being able succesfully to create the registry.
+We will assume the user has being able successfully to create the registry.
 Next step is to pull the image and push to private registry. On this example we used the official unpriviledged nginx image [nginxinc/nginx-unprivileged](https://hub.docker.com/r/nginxinc/nginx-unprivileged).
 
 Using a bash terminal:
@@ -247,7 +248,7 @@ containers:
 
 More information can be found on the official documentation of kubernetes [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
 
-**Note:** Kubernetes has the ability to set upscaling and also downscaling configuration parameters. On this example we only set upscaling as we try to keep it as simple as possible. For more information please read the official documentation [Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/).
+**Note:** Kubernetes has the ability to set up-scaling and also downscaling configuration parameters. On this example we only set upscaling as we try to keep it as simple as possible. For more information please read the official documentation [Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/).
 
 ### Kubernetes labels.
 The goal of `Recommended Labels` is to help other tools of `kubectl` / `dashboard` to visualize and manage kubernetes objects. Common set of labels can help tools to understand / describe the objects in a common manner that can be queried.
@@ -273,7 +274,7 @@ Users can use default predefined [Well-Known Labels, Annotations and Taints](htt
 Since we are trying touch the surface of Labels it is also very very important topic for users to read and understand [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/). This part of the documentation it is more for Architectural cluster design and Pod / resources allocation.
 
 ### Kubernetes livenessProbe.
-It is highly recoemmended that the user configures a livenessProbe on the container, so kubernetes can monitor the container and if needed to intefere based on strategy.
+It is highly recommended that the user configures a livenessProbe on the container, so kubernetes can monitor the container and if needed to intefere based on strategy.
 
 Sample of demo deployment and container configuration:
 
@@ -292,7 +293,9 @@ livenessProbe:
 More information can be found on the official kubernetes documentation [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/).
 
 ### Kubernetes pod and container security.
-For security purposes it is highly recommended that the container user should always be downgraded to a non `root` (not privileged) user. User name `root` is refered as the user which by default has access to all commands and files on the Linux / Unix Operating System (OS).
+For security purposes it is highly recommended that the container user should always be downgraded to a non `root` (not privileged) user. User name `root` is refered as the user which by default has access to all commands and files on the Linux / Unix Operating System (OS). 
+
+There are several parameters that the user can set. On this example we will use the minimal recommendations.
 
 Sample of demo deployment and pod / container security restrictions:
 
