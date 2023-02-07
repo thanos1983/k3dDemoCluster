@@ -1,7 +1,9 @@
 # k3dDemoCluster
+
 Simple fundamentals for K3d Cluster all-in-one with a few minor addons of k8s.
 
 ## Content:
+
 - [Prerequisites](#Prerequisites)
 - [Pulling and pushing image on local registry](#pulling-and-pushing-image-on-local-registry)
 - [Tag the image and push back to registry](#tag-the-image-and-push-back-to-registry)
@@ -19,7 +21,9 @@ Simple fundamentals for K3d Cluster all-in-one with a few minor addons of k8s.
 - [How to destroy cluster and local registry](#how-to-destroy-cluster-and-local-registry)
 
 ## Prerequisites.
-The user needs to have pre-installed `docker`, `kubectl` and `k3d`. Installation instructions on how to install [k3d](https://k3d.io/v5.4.6/) and [kubectl](https://kubernetes.io/docs/tasks/tools/).
+
+The user needs to have pre-installed `docker`, `kubectl` and `k3d`. Installation instructions on how to
+install [k3d](https://k3d.io/v5.4.6/) and [kubectl](https://kubernetes.io/docs/tasks/tools/).
 
 The user also needs to configure directory `/etc/hosts` for domain lookup.
 
@@ -33,7 +37,9 @@ $ head -n 4 /etc/hosts
 127.0.0.1       localhost   k3d-registry.localhost
 ```
 
+''
 Validate that the lookup is working as expected:
+
 ```bash
 $ ping k3d-registry.localhost
 PING k3d-registry.localhost(ip6-localhost (::1)) 56 data bytes
@@ -46,8 +52,10 @@ rtt min/avg/max/mdev = 0.051/0.278/0.506/0.227 ms
 ```
 
 ### Pulling and pushing image on local registry.
+
 We will assume the user has being able successfully to create the registry.
-Next step is to pull the image and push to private registry. On this example we used the official unpriviledged nginx image [nginxinc/nginx-unprivileged](https://hub.docker.com/r/nginxinc/nginx-unprivileged).
+Next step is to pull the image and push to private registry. On this example we used the official unpriviledged nginx
+image [nginxinc/nginx-unprivileged](https://hub.docker.com/r/nginxinc/nginx-unprivileged).
 
 Using a bash terminal:
 
@@ -93,6 +101,7 @@ alpine: digest: sha256:b2968c725aab10397452816204cb33da81374f6b229362e6c4eaacbd0
 ```
 
 ### List the images in the registry.
+
 Using a bash terminal:
 
 ```bash
@@ -101,6 +110,7 @@ $ curl -X GET http://k3d-registry.localhost:5000/v2/_catalog
 ```
 
 ### How to create the registry and k3d cluster.
+
 Using a bash terminal:
 
 ```bash
@@ -151,7 +161,9 @@ kubectl cluster-info
 ```
 
 ### Listing pods for cluster on all namespaces.
+
 Using a bash terminal:
+
 ```bash
 $ kubectl get pods -A
 NAMESPACE     NAME                                      READY   STATUS      RESTARTS   AGE
@@ -167,7 +179,9 @@ kube-system   traefik-7cd4fcff68-mksbv                  1/1     Running     0   
 ```
 
 ### Deploy to cluster.
+
 Using a bash terminal:
+
 ```bash
 $ kubectl apply -f ingressNginxDeployment.yaml
 namespace/demo created
@@ -178,7 +192,9 @@ ingress.networking.k8s.io/nginx-ingress created
 ```
 
 ### Listing the created pods in the specific namespace.
+
 Using a bash terminal:
+
 ```bash
 $ kubectl get pods -n demo
 NAME                              READY   STATUS    RESTARTS   AGE
@@ -187,7 +203,9 @@ nginx-deployment-7f4485f5-2z4c6   1/1     Running   0          11s
 ```
 
 ### Verify deployment through curl.
+
 Using a bash terminal:
+
 ```bash
 $ curl localhost:8080 | xmllint --format -
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -220,6 +238,7 @@ Commercial support is available at
 ```
 
 ### List Horizontal Pod Autoscaling on specific namespace.
+
 ```bash
 $ kubectl get hpa -n demo
 NAME        REFERENCE                     TARGETS   MINPODS   MAXPODS   REPLICAS   AGE
@@ -227,7 +246,9 @@ nginx-hpa   Deployment/nginx-deployment   91%/60%   1         2         2       
 ```
 
 ### Horizontal autoscaling configuration notes.
-On this simple demo we have restrained the resources of the container for demostration autoscaling purposes. **Warning:** Do not use these values on production environment they are only for demonstration purposes.
+
+On this simple demo we have restrained the resources of the container for demostration autoscaling purposes. **Warning:
+** Do not use these values on production environment they are only for demonstration purposes.
 
 Sample of configurations from deployment:
 
@@ -246,12 +267,18 @@ containers:
         memory: 10Mi
 ```
 
-More information can be found on the official documentation of kubernetes [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
+More information can be found on the official documentation of
+kubernetes [Resource Management for Pods and Containers](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/).
 
-**Note:** Kubernetes has the ability to set up-scaling and also downscaling configuration parameters. On this example we only set upscaling as we try to keep it as simple as possible. For more information please read the official documentation [Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/).
+**Note:** Kubernetes has the ability to set up-scaling and also downscaling configuration parameters. On this example we
+only set upscaling as we try to keep it as simple as possible. For more information please read the official
+documentation [Horizontal Pod Autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/).
 
 ### Kubernetes labels.
-The goal of `Recommended Labels` is to help other tools of `kubectl` / `dashboard` to visualize and manage kubernetes objects. Common set of labels can help tools to understand / describe the objects in a common manner that can be queried.
+
+The goal of `Recommended Labels` is to help other tools of `kubectl` / `dashboard` to visualize and manage kubernetes
+objects. Common set of labels can help tools to understand / describe the objects in a common manner that can be
+queried.
 
 Sample of the labels on this example:
 
@@ -265,16 +292,25 @@ selector:
     app.kubernetes.io/instance: "nginxLabel-dev"
 ```
 
-More information can be found on the official kubernetes documentation [Recommended Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/).
+More information can be found on the official kubernetes
+documentation [Recommended Labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/common-labels/).
 
-Labels do not stop only there. Labels can be used also for [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/). Deeper documentation can be also found on [Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).
+Labels do not stop only there. Labels can be used also
+for [Assigning Pods to Nodes](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/). Deeper
+documentation can be also found
+on [Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/).
 
-Users can use default predefined [Well-Known Labels, Annotations and Taints](https://kubernetes.io/docs/reference/labels-annotations-taints/).
+Users can use default
+predefined [Well-Known Labels, Annotations and Taints](https://kubernetes.io/docs/reference/labels-annotations-taints/).
 
-Since we are trying touch the surface of Labels it is also very very important topic for users to read and understand [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/). This part of the documentation it is more for Architectural cluster design and Pod / resources allocation.
+Since we are trying touch the surface of Labels it is also very very important topic for users to read and
+understand [Taints and Tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/). This
+part of the documentation it is more for Architectural cluster design and Pod / resources allocation.
 
 ### Kubernetes livenessProbe.
-It is highly recommended that the user configures a livenessProbe on the container, so kubernetes can monitor the container and if needed to intefere based on strategy.
+
+It is highly recommended that the user configures a livenessProbe on the container, so kubernetes can monitor the
+container and if needed to intefere based on strategy.
 
 Sample of demo deployment and container configuration:
 
@@ -290,10 +326,14 @@ livenessProbe:
   periodSeconds: 5
 ```
 
-More information can be found on the official kubernetes documentation [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/).
+More information can be found on the official kubernetes
+documentation [Configure Liveness, Readiness and Startup Probes](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/).
 
 ### Kubernetes pod and container security.
-For security purposes it is highly recommended that the container user should always be downgraded to a non `root` (not privileged) user. User name `root` is refered as the user which by default has access to all commands and files on the Linux / Unix Operating System (OS). 
+
+For security purposes it is highly recommended that the container user should always be downgraded to a non `root` (not
+privileged) user. Username `root` is referred as the user which by default has access to all commands and files on the
+Linux / Unix Operating System (OS).
 
 There are several parameters that the user can set. On this example we will use the minimal recommendations.
 
@@ -312,14 +352,19 @@ spec:
         allowPrivilegeEscalation: false
 ```
 
-In the above example, the image used has a custom user with [UID](https://linux.die.net/man/3/uid) and [GID](https://www.unix.com/man-page/linux/1/gid/) 101. It is highly recommended for the users to prepare a Dockerfile with a downgraded user and not a root user for extra security.
+In the above example, the image used has a custom user with [UID](https://linux.die.net/man/3/uid)
+and [GID](https://www.unix.com/man-page/linux/1/gid/) 101. It is highly recommended for the users to prepare a
+Dockerfile with a downgraded user and not a root user for extra security.
 
-More information can be found on the official kubernetes documentation [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
+More information can be found on the official kubernetes
+documentation [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 
 ### How to destroy cluster and local registry.
+
 At the end of the experimentation the user can destroy the cluster and registry.
 
 Using a bash terminal:
+
 ```bash
 $ ./k3sScripts.sh -d
 you have supplied the -d 'destroy' option
