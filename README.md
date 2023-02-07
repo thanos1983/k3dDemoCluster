@@ -78,7 +78,6 @@ Using a bash terminal:
 
 ```bash
 $ docker tag nginxinc/nginx-unprivileged:alpine k3d-registry.localhost:5000/nginx-unprivileged:alpine
-rivileged:alpine
 $ docker push k3d-registry.localhost:5000/nginx-unprivileged:alpine
 The push refers to repository [k3d-registry.localhost:5000/nginx-unprivileged]
 60869e226b5a: Pushed
