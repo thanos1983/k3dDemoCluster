@@ -4,7 +4,8 @@ Simple fundamentals for K3d Cluster all-in-one with a few minor addons of k8s.
 
 ## Content:
 
-- [Prerequisites](#Prerequisites)
+- [Basic information regarding kubernetes (k8s)](#basic-information-regarding-kubernetes--k8s--)
+- [Prerequisites](#prerequisites)
 - [Pulling and pushing image on local registry](#pulling-and-pushing-image-on-local-registry)
 - [Tag the image and push back to registry](#tag-the-image-and-push-back-to-registry)
 - [List the images in the registry](#list-the-images-in-the-registry)
@@ -19,6 +20,25 @@ Simple fundamentals for K3d Cluster all-in-one with a few minor addons of k8s.
 - [Kubernetes livenessProbe](#kubernetes-livenessProbe)
 - [Kubernetes pod and container security](#kubernetes-pod-and-container-security)
 - [How to destroy cluster and local registry](#how-to-destroy-cluster-and-local-registry)
+
+## Basic information regarding kubernetes (k8s).
+
+The big question. What is k8s? Taken out of the official page of k8s:
+
+````bash
+Kubernetes, also known as K8s, is an open-source system for automating deployment, scaling, and management of
+containerized applications.
+
+It groups containers that make up an application into logical units for easy management and discovery. Kubernetes builds
+upon 15 years of experience of running production workloads at Google, combined with best-of-breed ideas and practices
+from the community.
+````
+
+ref: [kubernetes](https://kubernetes.io/)
+
+On this tutorial we will try to provide a simple installation of k8s on localhost (personal PC) of a Developer / DevOps
+so the user can experiment on a controlled environment where even if the environment gets messed up we can always
+destroy the cluster and start for scratch again.
 
 ## Prerequisites.
 
@@ -37,7 +57,6 @@ $ head -n 4 /etc/hosts
 127.0.0.1       localhost   k3d-registry.localhost
 ```
 
-''
 Validate that the lookup is working as expected:
 
 ```bash
@@ -54,7 +73,7 @@ rtt min/avg/max/mdev = 0.051/0.278/0.506/0.227 ms
 ### Pulling and pushing image on local registry.
 
 We will assume the user has being able successfully to create the registry.
-Next step is to pull the image and push to private registry. On this example we used the official unpriviledged nginx
+Next step is to pull the image and push to private registry. On this example we used the official unprivileged nginx
 image [nginxinc/nginx-unprivileged](https://hub.docker.com/r/nginxinc/nginx-unprivileged).
 
 Using a bash terminal:
@@ -247,7 +266,7 @@ nginx-hpa   Deployment/nginx-deployment   91%/60%   1         2         2       
 
 ### Horizontal autoscaling configuration notes.
 
-On this simple demo we have restrained the resources of the container for demostration autoscaling purposes. **Warning:
+On this simple demo we have restrained the resources of the container for demonstration autoscaling purposes. **Warning:
 ** Do not use these values on production environment they are only for demonstration purposes.
 
 Sample of configurations from deployment:
